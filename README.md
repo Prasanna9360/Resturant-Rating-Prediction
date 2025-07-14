@@ -1,60 +1,43 @@
-🍽️ Restaurant Recommendation System
-This project is a content-based restaurant recommendation system that suggests similar restaurants based on user preferences and selected restaurant features using cosine similarity.
+# 🍽️ Restaurant Rating Prediction using Machine Learning
 
-📌 Features Used for Recommendations
-Cuisine Preferences:
+This project builds a machine learning model to **predict the aggregate rating of restaurants** using various features like service rating, food rating, price, cuisine, and more.
 
-south_indian_or_not
+---
 
-north_indian_or_not
+## 🎯 Objective
 
-fast_food_or_not
+To develop a regression model that can predict the **aggregate rating** (on a scale from 0 to 2) of a restaurant based on its characteristics.
 
-street_food
+---
 
-biryani_or_not
+## 🧪 Dataset
 
-bakery_or_not
+The dataset used is sourced from a **multi-file restaurant dataset** that includes:
+- `geoplaces2.csv`: Restaurant details (location, price, etc.)
+- `rating_final.csv`: User ratings (target column)
+- `chefmozcuisine.csv`: Cuisine types per restaurant
 
-Other Features:
+> All files were merged and preprocessed to form the final dataset for modeling.
 
-average_price
+---
 
-rating
+## 🧹 Preprocessing Steps
 
-⚙️ How It Works
-The dataset is preprocessed using Min-Max Scaling to normalize values.
+1. Merged `rating_final`, `geoplaces2`, and `chefmozcuisine` on `placeID`.
+2. Selected relevant columns:
+   - `food_rating`, `service_rating`, `price`, `area`, `franchise`, `Rcuisine`
+3. Handled missing values by replacing with `'Unknown'`.
+4. Encoded categorical columns using `LabelEncoder`.
+5. Split dataset into **training (80%)** and **testing (20%)**.
 
-A cosine similarity matrix is computed between all restaurant feature vectors.
+---
 
-Given a restaurant name, the system finds and recommends the top N most similar restaurants.
+## 🤖 Model Used
 
-🗂️ Dataset
-Make sure your CSV file indian_restaurants.csv has at least the following columns:
+- **Algorithm**: Linear Regression
+- **Library**: `scikit-learn`
 
-restaurant_name
-
-location
-
-south_indian_or_not
-
-north_indian_or_not
-
-fast_food_or_not
-
-street_food
-
-biryani_or_not
-
-bakery_or_not
-
-average_price
-
-rating
-
-✍️ Author
-Prasanna Ganesan
-
-📜 License
-This project is open source and available under the MIT License.
-
+```python
+from sklearn.linear_model import LinearRegression
+model = LinearRegression()
+model.fit(X_train, y_train)
